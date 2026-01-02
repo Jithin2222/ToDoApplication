@@ -1,0 +1,258 @@
+/* =====================================================
+   ROOT VARIABLES
+===================================================== */
+:root {
+    --primary: #0d6efd;
+    --primary-dark: #0b5ed7;
+    --danger: #dc3545;
+    --success: #198754;
+    --warning: #ffc107;
+
+    --bg-main: #f4f6f9;
+    --bg-card: #ffffff;
+
+    --text-main: #212529;
+    --text-muted: #6c757d;
+
+    --border-light: #e5e7eb;
+    --radius: 10px;
+
+    --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.06);
+    --shadow-md: 0 8px 24px rgba(0, 0, 0, 0.08);
+}
+
+/* =====================================================
+   GLOBAL STYLES
+===================================================== */
+* {
+    box-sizing: border-box;
+}
+
+body {
+    font-family: "Segoe UI", system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+    background-color: var(--bg-main);
+    color: var(--text-main);
+    margin: 0;
+    padding: 0;
+    line-height: 1.6;
+}
+
+a {
+    text-decoration: none;
+}
+
+.container {
+    max-width: 1100px;
+}
+
+/* =====================================================
+   NAVBAR
+===================================================== */
+.navbar {
+    background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+    box-shadow: var(--shadow-sm);
+}
+
+.navbar-brand {
+    font-size: 1.4rem;
+    font-weight: 700;
+    letter-spacing: 0.5px;
+}
+
+/* =====================================================
+   HEADINGS
+===================================================== */
+h2 {
+    font-weight: 700;
+    margin-bottom: 0;
+}
+
+h5 {
+    font-weight: 600;
+}
+
+/* =====================================================
+   BUTTONS
+===================================================== */
+.btn {
+    border-radius: 8px;
+    font-weight: 500;
+    transition: all 0.25s ease;
+}
+
+.btn-primary {
+    background-color: var(--primary);
+    border-color: var(--primary);
+}
+
+.btn-primary:hover {
+    background-color: var(--primary-dark);
+    border-color: var(--primary-dark);
+}
+
+.btn-outline-primary:hover,
+.btn-outline-danger:hover {
+    color: #fff;
+}
+
+.btn-group .btn {
+    white-space: nowrap;
+}
+
+/* =====================================================
+   TASK LIST
+===================================================== */
+.list-group {
+    border-radius: var(--radius);
+    overflow: hidden;
+    box-shadow: var(--shadow-md);
+}
+
+.list-group-item {
+    border: none;
+    border-bottom: 1px solid var(--border-light);
+    padding: 1.25rem;
+    background-color: var(--bg-card);
+    transition: background-color 0.25s ease, transform 0.2s ease;
+}
+
+.list-group-item:last-child {
+    border-bottom: none;
+}
+
+.list-group-item:hover {
+    background-color: #f8fafc;
+    transform: translateY(-2px);
+}
+
+/* Completed task */
+.list-group-item.completed {
+    background-color: #f1f5f9;
+}
+
+.list-group-item.completed h5 {
+    text-decoration: line-through;
+    color: var(--text-muted);
+}
+
+/* =====================================================
+   TASK META
+===================================================== */
+.list-group-item p {
+    margin-bottom: 0.25rem;
+}
+
+.list-group-item small {
+    font-size: 0.8rem;
+}
+
+/* =====================================================
+   EMPTY STATE
+===================================================== */
+.alert-info {
+    background-color: #eef5ff;
+    border: 1px solid #dbeafe;
+    color: #1e3a8a;
+    border-radius: var(--radius);
+    box-shadow: var(--shadow-sm);
+}
+
+/* =====================================================
+   CARDS (CREATE / EDIT / DELETE)
+===================================================== */
+.card {
+    border: none;
+    border-radius: var(--radius);
+    background-color: var(--bg-card);
+    box-shadow: var(--shadow-md);
+}
+
+.card-header {
+    border-bottom: none;
+    padding: 1rem 1.25rem;
+}
+
+.card-header h2 {
+    font-size: 1.25rem;
+    font-weight: 700;
+}
+
+.card-body {
+    padding: 1.5rem;
+}
+
+/* =====================================================
+   FORMS
+===================================================== */
+.form-label {
+    font-size: 0.9rem;
+}
+
+.form-control,
+textarea {
+    border-radius: 8px;
+    border: 1px solid var(--border-light);
+    padding: 0.6rem 0.75rem;
+    transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.form-control:focus,
+textarea:focus {
+    border-color: var(--primary);
+    box-shadow: 0 0 0 0.15rem rgba(13, 110, 253, 0.15);
+}
+
+.form-check-input {
+    cursor: pointer;
+}
+
+.form-check-label {
+    cursor: pointer;
+}
+
+/* Invalid input */
+.is-invalid {
+    border-color: var(--danger);
+}
+
+/* =====================================================
+   DELETE CONFIRMATION
+===================================================== */
+.alert-warning {
+    border-radius: var(--radius);
+    background-color: #fff8e1;
+    border: 1px solid #ffe69c;
+}
+
+.alert-warning h5 {
+    font-weight: 700;
+}
+
+/* =====================================================
+   UTILITIES
+===================================================== */
+.text-muted {
+    color: var(--text-muted) !important;
+}
+
+.shadow-sm {
+    box-shadow: var(--shadow-sm) !important;
+}
+
+/* =====================================================
+   ANIMATIONS
+===================================================== */
+.list-group-item {
+    animation: fadeUp 0.4s ease forwards;
+}
+
+@keyframes fadeUp {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
