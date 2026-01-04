@@ -1,0 +1,111 @@
+{% extends 'tasks/base.html' %}
+{% load static %}
+
+{% block title %}My Notes{% endblock %}
+
+{% block content %}
+<div class="notes-container">
+    <!-- Header -->
+    <div class="notes-header">
+        <h1 class="notes-title">MY NOTES</h1>
+        <div class="notes-actions">
+            <a href="{% url 'note_create' %}" class="btn-new-note">
+                <span>📝</span> Add new
+            </a>
+        </div>
+    </div>
+
+    <!-- Recent Folders Section -->
+    <div class="folders-section">
+        <div class="section-header">
+            <h3>Recent Folders</h3>
+            <div class="time-filters">
+                <a href="?filter=today" class="filter-link {% if active_filter == 'today' %}active{% endif %}">Today</a>
+                <a href="?filter=week" class="filter-link {% if active_filter == 'week' %}active{% endif %}">This Week</a>
+                <a href="?filter=month" class="filter-link {% if active_filter == 'month' %}active{% endif %}">This Month</a>
+            </div>
+        </div>
+
+        <div class="folders-grid">
+            {% for folder in folders %}
+            <div class="folder-card" style="background-color: {{ folder.color }}20;">
+                <div class="folder-icon" style="background-color: {{ folder.color }};">
+                    <span>📁</span>
+                </div>
+                <div class="folder-info">
+                    <h4>{{ folder.name }}</h4>
+                    <p>{{ folder.note_count }} note{{ folder.note_count|pluralize }}</p>
+                </div>
+                <div class="folder-actions">
+                    <a href="?folder={{ folder.id }}" class="folder-action-btn">View</a>
+                    <a href="{% url 'folder_delete' folder.id %}" class="folder-action-btn delete">×</a>
+                </div>
+            </div>
+            {% endfor %}
+            
+            <!-- New Folder Card -->
+            <a href="{% url 'folder_create' %}" class="folder-card new-folder">
+                <div class="new-folder-icon">
+                    <span>+</span>
+                </div>
+                <p>New Folder</p>
+            </a>
+        </div>
+    </div>
+
+    <!-- My Notes Section -->
+    <div class="notes-section">
+        <div class="section-header">
+            <h3>My Notes</h3>
+            <div class="time-filters">
+                <a href="?" class="filter-link {% if active_filter == 'all' %}active{% endif %}">All</a>
+                <a href="?filter=today" class="filter-link {% if active_filter == 'today' %}active{% endif %}">Today</a>
+                <a href="?filter=week" class="filter-link {% if active_filter == 'week' %}active{% endif %}">This Week</a>
+                <a href="?filter=month" class="filter-link {% if active_filter == 'month' %}active{% endif %}">This Month</a>
+            </div>
+        </div>
+
+        <div class="notes-grid">
+            {% for note in notes %}
+            <div class="note-card" style="background-color: {{ note.folder.color|default:'#C7D2FE' }}40;">
+                <div class="note-header">
+                    <span class="note-date">{{ note.updated_at|date:"d M, Y" }}</span>
+                    <div class="note-menu">
+                        <a href="{% url 'note_toggle_pin' note.id %}" class="note-menu-btn" title="Pin">
+                            {% if note.is_pinned %}📌{% else %}📍{% endif %}
+                        </a>
+                        <a href="{% url 'note_edit' note.id %}" class="note-menu-btn" title="Edit">✏️</a>
+                        <a href="{% url 'note_delete' note.id %}" class="note-menu-btn delete" title="Delete">🗑️</a>
+                    </div>
+                </div>
+                <h4 class="note-title">{{ note.title }}</h4>
+                <p class="note-preview">{{ note.get_preview }}</p>
+                <div class="note-footer">
+                    {% if note.folder %}
+                    <span class="note-folder" style="background-color: {{ note.folder.color }}40; color: #333;">
+                        📁 {{ note.folder.name }}
+                    </span>
+                    {% endif %}
+                    <span class="note-time">{{ note.updated_at|date:"H:i" }}</span>
+                </div>
+            </div>
+            {% empty %}
+            <div class="empty-state">
+                <div class="empty-icon">📝</div>
+                <h3>No notes yet</h3>
+                <p>Create your first note to get started!</p>
+                <a href="{% url 'note_create' %}" class="btn-primary">Create Note</a>
+            </div>
+            {% endfor %}
+
+            <!-- New Note Card -->
+            <a href="{% url 'note_create' %}" class="note-card new-note">
+                <div class="new-note-icon">
+                    <span>+</span>
+                </div>
+                <p>New Note</p>
+            </a>
+        </div>
+    </div>
+</div>
+{% endblock %}

@@ -30,6 +30,7 @@ urlpatterns = [
     path('', redirect_to_login, name='home'),  # Root URL redirect
     path('accounts/', include('accounts.urls')),  # Change from '' to 'accounts/'
     path('tasks/', include('tasks.urls')),  # Tasks URLs
+    path('notes/', include('notes.urls')),
 ]
 
 # Serve media files in development
